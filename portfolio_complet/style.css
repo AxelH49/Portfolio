@@ -233,6 +233,27 @@ footer a {
     text-decoration: none;
 }
 
+/* Wrapper image projet (layout gauche + lightbox) */
+.projet-img-wrapper {
+    max-width: 400px;
+    flex: 1;
+    min-width: 250px;
+}
+
+.projet-img-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    cursor: zoom-in;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.projet-img-wrapper img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+}
+
 /* Zoom container (image pleine largeur cliquable) */
 .zoom-container {
     width: 100%;
