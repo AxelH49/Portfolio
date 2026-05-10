@@ -6,8 +6,17 @@
     <meta name="description" content="Portfolio d'Axel Hany, étudiant en BTS SIO option SISR">
     <title>Portfolio - Axel Hany - BTS SIO SISR</title>
     <link rel="stylesheet" href="style.css">
+
+
 </head>
 <body>
+    <!-- ===== LIGHTBOX : markup ajouté ===== -->
+    <div id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image agrandie">
+        <span id="lightbox-close" title="Fermer">&times;</span>
+        <img id="lightbox-img" src="" alt="Image agrandie">
+    </div>
+    <!-- ===== FIN lightbox markup ===== -->
+
     <header>
         <h1>Axel Hany</h1>
         <p>Étudiant en BTS SIO - Option SISR</p>
@@ -166,16 +175,29 @@
                 </div>
             </div>
         </div>
+
+        <!-- ===================================================
+             PROJET BTS 2ème ANNÉE — image pleine largeur + lightbox
+             =================================================== -->
         <div class="projet">
             <div class="projet-header">
-                <h3>Infrastructure réseau pour une entreprise dans le cadre d'un projet de BTS deuxième année </h3>
+                <h3>Infrastructure réseau pour une entreprise dans le cadre d'un projet de BTS deuxième année</h3>
                 <span class="projet-date">Projet SIO - Chevrollier - 2025</span>
             </div>
-            <div class="projet-content">
+            <div class="projet-content full-width-image">
+
+                <!-- Image pleine largeur, cliquable pour la lightbox -->
                 <div class="zoom-container">
-                    <img src="Infra_Finit.png" alt="Schéma-réseau">  
+                    <img
+                        src="Infra_Finit.png"
+                        alt="Schéma réseau - Infrastructure BTS 2ème année"
+                        class="lightbox-trigger"
+                        title="Cliquer pour agrandir"
+                    >
                 </div>
-                    <div class="projet-description">
+                <p class="zoom-hint">🔍 Cliquez sur l'image pour l'agrandir</p>
+
+                <div class="projet-description">
                     <h4>Contexte :</h4>
                     <p>Mise en place d'une infrastructure réseau complète pour une entreprise fictive dans le cadre de mon projet de BTS SIO Deuxième année.</p>
                     
@@ -200,6 +222,10 @@
                 </div>
             </div>
         </div>
+        <!-- ===================================================
+             FIN PROJET BTS 2ème ANNÉE
+             =================================================== -->
+
         <div class="projet">
             <div class="projet-header">
                 <h3>Infrastructure réseau pour une entreprise dans le cadre d'un projet de BTS première année </h3>
@@ -266,8 +292,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Répéter la même structure pour les autres projets -->
         
     </section>
 
@@ -292,7 +316,7 @@
                     <h4>Suricata</h4>
                     <p>Suricata est un moteur IDS / IPS open-source très puissant utilisé pour détecter et bloquer les attaques sur un réseau. Fonctions principales de Suricata : </p>
                 <ul>
-                        <li>Détection d’attaques (malwares, scans, injections, exploits…)</li>
+                        <li>Détection d'attaques (malwares, scans, injections, exploits…)</li>
                         <li>Blocage du trafic malveillant</li>
                         <li>Inspection profonde des paquets (DPI)</li>                       
                     </ul>
@@ -325,5 +349,40 @@
         <p>© 2023 Axel Hany - Portfolio BTS SIO</p>
         <p><a href="mentions.html">Mentions légales</a></p>
     </footer>
+
+    <!-- ===== LIGHTBOX : script ajouté ===== -->
+    <script>
+        const overlay  = document.getElementById('lightbox-overlay');
+        const lbImg    = document.getElementById('lightbox-img');
+        const lbClose  = document.getElementById('lightbox-close');
+
+        // Ouvrir la lightbox au clic sur une image .lightbox-trigger
+        document.querySelectorAll('.lightbox-trigger').forEach(img => {
+            img.addEventListener('click', () => {
+                lbImg.src = img.src;
+                lbImg.alt = img.alt;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // empêche le scroll derrière
+            });
+        });
+
+        // Fermer en cliquant sur le fond ou la croix
+        function closeLightbox() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            lbImg.src = '';
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay || e.target === lbImg) closeLightbox();
+        });
+        lbClose.addEventListener('click', closeLightbox);
+
+        // Fermer avec Échap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+    <!-- ===== FIN script lightbox ===== -->
 </body>
 </html>
